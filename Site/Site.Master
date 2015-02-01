@@ -4,8 +4,8 @@
 <head runat="server">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta name='yandex-verification' content='4ce42a0173a1c976' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name='yandex-verification' content='4ce42a0173a1c976'>
 
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700&subset=cyrillic,latin" />
 
@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="/Content/custom.css" />
 
     <!-- Slick carousel -->
-    <link rel="stylesheet" href="/Content/slick.css" />
-    <link rel="stylesheet" href="/Content/carousel.css" />
+    <link rel="stylesheet" href="/Content/slick.css">
+    <link rel="stylesheet" href="/Content/carousel.css">
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
@@ -37,189 +37,172 @@
 </head>
 <body>
 
-    <label id="ApiEndpoint" style="display: none"><%=Core.Configuration.Current.ApiEndpoint %></label>
+    <label id="ApiEndpoint" class="hidden"><%=Core.Configuration.Current.ApiEndpoint %></label>
 
     <header class="container-fluid">
-        <div class="row center-block">
-            <div class="site-tile-text col-md-12">
-                НАЦІОНАЛЬНИЙ ТЕХНІЧНИЙ УНІВЕРСИТЕТ УКРАЇНИ "КИЇВСЬКИЙ ПОЛІТЕХНІЧНИЙ ІНСТИТУТ"
+        <div class="row center-block site-tile-text">
+            НАЦІОНАЛЬНИЙ ТЕХНІЧНИЙ УНІВЕРСИТЕТ УКРАЇНИ "КИЇВСЬКИЙ ПОЛІТЕХНІЧНИЙ ІНСТИТУТ"
+        </div>
+        <div class="green">
+            <a href="/Default.aspx" class="header-logo pull-left">
+                <img src="/Images/logo-small.png" alt="campus small logo">
+            </a>
+            <div class="navbar pull-right">
+                <ul>
+                    <li>
+                        <a href="/Default.aspx">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Modules/SubSystems" title="Підсистеми">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout" id="ExitLink"><i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+                <a href="#!" data-popover="userInfo" class="user-name">Вітаємо,
+                            <asp:Literal ID="UserName" runat="server"></asp:Literal>
+                </a>
             </div>
         </div>
-        <div class="header-nav">
-            <div class="green">
-                <a href="/Default.aspx">
-                    <div class="header-logo pull-left">
-                        <img src="/Images/logo-small.png" alt="campus small logo" />
+    </header>
+
+    <form class="content container" id="form" runat="server">
+
+        <asp:HiddenField runat="server" ID="CampusSessionId" ClientIDMode="Static" />
+        <asp:ScriptManager EnableCdn="true" ID="script_manager" runat="server">
+            <Scripts>
+                <asp:ScriptReference Path="~/Scripts/jquery-2.1.3.min.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery-ui.min.js" />
+                <%-- объединил сюда datepicker & autocomplete --%>
+                <asp:ScriptReference Path="~/Scripts/bootbox.min.js" />
+                <asp:ScriptReference Path="~/Scripts/chosen.jquery.min.js" />
+                <asp:ScriptReference Path="~/Scripts/core.js" />
+                <asp:ScriptReference Path="~/Scripts/bootstrap-clockpicker.min.js" />
+                <asp:ScriptReference Path="~/Scripts/picker.js" />
+                <asp:ScriptReference Path="~/Scripts/picker.date.js" />
+                <asp:ScriptReference Path="~/Scripts/legacy.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.bootpag.min.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.ambiance.js" />
+                <asp:ScriptReference Path="~/Scripts/jquery.eventsource.js" />
+                <asp:ScriptReference Path="~/Scripts/script.js" />
+                <asp:ScriptReference Path="~/Scripts/site.js" />
+                <asp:ScriptReference Path="~/Scripts/pako.min.js" />
+                <asp:ScriptReference Path="~/Scripts/APIlib.js" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!--Carousel-->
+        <div id="js-carousel" class="carousel">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <div class="carousel-group">
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Default.aspx">
+                            <img src="/Images/carousel-profile-button.png" alt="">
+                        </a>
                     </div>
-                </a>
-                <div class="navbar pull-right">
-                    <ul>
-                        <li>
-                            <a href="/Default.aspx">
-                                <i class="fa fa-home"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Modules/SubSystems" title="Підсистеми">
-                                <i class="fa fa-briefcase"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/logout" id="ExitLink"><i class="fa fa-sign-out"></i></a>
-                        </li>
-                    </ul>
-                    <div class="user-name">
-                        <a href="#!" data-popover="userInfo">Вітаємо,
-                            <asp:Literal ID="UserName" runat="server"></asp:Literal>
+                </div>
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Modules/Bulletins/">
+                            <img src="/Images/carousel-billboard-button.png" alt="">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/Modules/Messages/">
+                            <img src="/Images/carousel-communion-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-group">
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="#!" data-modal="datepicker_data">
+                            <img src="/Images/calendar.png" alt="">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/Modules/EIR/Search.aspx">
+                            <img src="/Images/carousel-teachers-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Modules/EIR/StudyGroups.aspx">
+                            <img src="/Images/carousel-studygroups-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-group">
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Modules/MZSearch/">
+                            <img src="/Images/carousel-methodologicalsupport-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="#">
+                            <img src="/Images/carousel-currentcontrol-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-group">
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Modules/EIR/">
+                            <img src="/Images/carousel-eip-button.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-group">
+                <div class="carousel-row">
+                    <div class="carousel-item">
+                        <a href="/Modules/IndividualTeachersPlan/">
+                            <img src="/Images/carousel-plan-button.png" alt="">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+        <!-- ---------- -->
 
-    <div class="wrap container">
-        <form class="content" id="form" runat="server">
+        <!--Хлебные крошки-->
+        <div class="row site-breadcrumbs">
+            <ol class="breadcrumb">
+                <asp:ContentPlaceHolder ID="breadcrumbs" runat="server"></asp:ContentPlaceHolder>
+            </ol>
+        </div>
+        <!--================-->
+        <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
 
-            <asp:HiddenField runat="server" ID="CampusSessionId" ClientIDMode="Static" />
-            <asp:ScriptManager EnableCdn="true" ID="script_manager" runat="server">
-                <Scripts>
-                    <asp:ScriptReference Path="~/Scripts/jquery-2.1.3.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/jquery-ui.min.js" />
-                    <%-- объединил сюда datepicker & autocomplete --%>
-                    <asp:ScriptReference Path="~/Scripts/bootbox.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/chosen.jquery.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/core.js" />
-                    <asp:ScriptReference Path="~/Scripts/bootstrap-clockpicker.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/picker.js" />
-                    <asp:ScriptReference Path="~/Scripts/picker.date.js" />
-                    <asp:ScriptReference Path="~/Scripts/legacy.js" />
-                    <asp:ScriptReference Path="~/Scripts/jquery.bootpag.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/jquery.ambiance.js" />
-                    <asp:ScriptReference Path="~/Scripts/jquery.eventsource.js" />
-                    <asp:ScriptReference Path="~/Scripts/script.js" />
-                    <asp:ScriptReference Path="~/Scripts/site.js" />
-                    <asp:ScriptReference Path="~/Scripts/pako.min.js" />
-                    <asp:ScriptReference Path="~/Scripts/APIlib.js" />
-                </Scripts>
-            </asp:ScriptManager>
-
-            <!--Carousel-->
-            <div id="js-carousel" class="carousel">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <div class="carousel-group">
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Default.aspx">
-                                <img src="/Images/carousel-profile-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Modules/Bulletins/">
-                                <img src="/Images/carousel-billboard-button.png" alt="">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="/Modules/Messages/">
-                                <img src="/Images/carousel-communion-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-group">
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="#!" data-modal="datepicker_data">
-                                <img src="/Images/calendar.png" alt="">                                                                             
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="/Modules/EIR/Search.aspx">
-                                <img src="/Images/carousel-teachers-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Modules/EIR/StudyGroups.aspx">
-                                <img src="/Images/carousel-studygroups-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-group">
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Modules/MZSearch/">
-                                <img src="/Images/carousel-methodologicalsupport-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="#">
-                                <img src="/Images/carousel-currentcontrol-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-group">
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Modules/EIR/">
-                                <img src="/Images/carousel-eip-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-group">
-                    <div class="carousel-row">
-                        <div class="carousel-item">
-                            <a href="/Modules/IndividualTeachersPlan/">
-                                <img src="/Images/carousel-plan-button.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ---------- -->
-
-
-            <!--Хлебные крошки-->
-            <div class="row site-breadcrumbs">
-                <ol class="breadcrumb">
-                    <asp:ContentPlaceHolder ID="breadcrumbs" runat="server"></asp:ContentPlaceHolder>
-                </ol>
-            </div>
-            <!--================-->
-            <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
-
-
-        </form>
-
-    </div>
+    </form>
 
     <footer class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                Національний технічний університет України<br />
-                “Київський політехнічний інститут”<br />
+                Національний технічний університет України<br>
+                “Київський політехнічний інститут”<br>
                 <a href="http://kpi.ua/" class="orange">www.kpi.ua</a> Електронний кампус                
             </div>
             <div class="col-md-6 text-right">
-                Розробник: Конструкторське бюро<br />
-                інформаційних систем<br />
+                Розробник: Конструкторське бюро<br>
+                інформаційних систем<br>
                 <a href="http://kbis.kpi.ua/" class="orange">www.kbis.kpi.ua</a>
             </div>
         </div>
     </footer>
-
-    <div id="js-calendar-container" style="visibility: hidden; display: none; width: 100%">
-    </div>
-    
 
     <script>
         var userInfo = {

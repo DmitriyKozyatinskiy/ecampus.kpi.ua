@@ -57,29 +57,6 @@ var Core = (function (Core, _u, $) {
          _cssId = {
              carousel: "js-carousel",
          },
-         
-        /** 
-         * List of the css data-*
-         * 
-         * @type {Object}
-         * @private
-         */
-         _cssData = {
-             modal: "modal"
-         },
-
-        /**
-         * Attach custom events to the carousel elements
-         *
-         * @return {void}
-         * @private
-         */
-         _attachEvents = function () {
-             // Modals
-             $(_u.toCssData(_cssData.modal), _u.toCssId(_cssId.carousel)).click(function () {
-                 $.planner.Show($(this).data(_cssData.modal));
-             });
-         },
 
         /**
          * Setup this module
@@ -88,7 +65,6 @@ var Core = (function (Core, _u, $) {
          */
          setup = function () {
              $(_u.toCssId(_cssId.carousel)).slick(_settings);
-             _attachEvents();
          };
 
     return Core.register("Carousel", {

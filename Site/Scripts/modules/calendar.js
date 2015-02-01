@@ -22,6 +22,14 @@ var Core = (function (Core, document, _u, $) {
          _datepicker = "datepicker",
 
         /**
+         * Css data trigger
+         *
+         * @type {String}
+         * @private
+         */
+         _dataModal = "modal",
+
+        /**
          * Calendar css ids
          *
          * @type {Object}
@@ -77,7 +85,7 @@ var Core = (function (Core, document, _u, $) {
          * @public
          * @TODO deal with this pile of crap
          */
-         _subscribe = function () {
+         _attachEvents = function () {
              var $datepicker = $(_u.toCssClass(_datepicker)),
                  datepickerVal = $datepicker.val();
 
@@ -94,12 +102,12 @@ var Core = (function (Core, document, _u, $) {
                  var $archiveBtn = $(_u.toCssId(_Ids.archive_button)),
                      $input01 = $(_u.toCssId(_Ids.input01))
                  if ($archiveBtn.html() == "Архів") {
-                     $input01.css('width', '251px');
+                     $input01.css("width", "251px");
                      $archiveBtn.html("Актуальні");
                      $.planner.RenderTimeLabels($datepicker.val(), true);
                  } else {
                      $archiveBtn.html("Архів");
-                     $input01.css('width', '290px');
+                     $input01.css("width", "290px");
                      $.planner.RenderTimeLabels($datepicker.val(), false);
                  }
              });
@@ -115,6 +123,10 @@ var Core = (function (Core, document, _u, $) {
                  $.planner.RenderTimeLabels(datepickerVal);
                  $.ddate = datepickerVal;
              });
+
+             _document.on("click", _u.toCssData(_dataModal), function () {
+                 $.planner.Show($(this).data(_dataModal));
+             }); 
          },
 
         /**
@@ -130,7 +142,7 @@ var Core = (function (Core, document, _u, $) {
              $.notifications.Subscribe(_parameters.subscribe, _settings.subscribeUrl);
              $.planner = new Planner(_settings.sessionId);
              $.ddate = $.planner.Today;
-             _subscribe();
+             _attachEvents();
          };
 
     return Core.register("Calendar", {
